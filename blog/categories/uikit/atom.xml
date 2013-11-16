@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Simon Blommegård]]></title>
-  <link href="http://blommegard.github.io/atom.xml" rel="self"/>
+  <title><![CDATA[Category: UIKit | Simon Blommegård]]></title>
+  <link href="http://blommegard.github.io/blog/categories/uikit/atom.xml" rel="self"/>
   <link href="http://blommegard.github.io/"/>
   <updated>2013-11-15T21:58:32-08:00</updated>
   <id>http://blommegard.github.io/</id>
@@ -10,6 +10,7 @@
     <name><![CDATA[Simon Blommegård]]></name>
     
   </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
 
   
   <entry>

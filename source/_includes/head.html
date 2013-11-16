@@ -2,7 +2,7 @@
 <html lang="en-GB">
 <head>
 	<meta charset="utf-8">
-	<title>{% if page.title %}{{ page.title }} {% else %}{{site.subtitle}} {% endif %} | {{ site.title }}</title>
+	<title>{% if page.title %}{{ page.title }} | {% else %}{{site.subtitle}} {% endif %} {{ site.title }}</title>
 
 	<meta name="author" content="{% if site.author %}{{ site.author }}{% else %}{{ site.title }}{% endif %}">
 {% capture description %}{% if page.description %}{{ page.description }}{% elsif site.description %}{{ site.description }}{%else%}{{ content | raw_content }}{% endif %}{% endcapture %}

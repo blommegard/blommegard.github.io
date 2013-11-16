@@ -9,8 +9,7 @@ footer: true
 
 Passionate iOS Developer at [Wrapp](http://wrapp.com).
 
-Social: [twitter.com/blommegard](http://twitter.com/blommegard), [github.com/blommegard](http://github.com/blommegard)
-
+Social: [@blommegard](http://twitter.com/blommegard), [github.com/blommegard](http://github.com/blommegard)  
+Mail: simon at blommegard dot se  
 Home-base: San Francisco, CA & Stockholm, Sweden
 
-Contact me via simon at blommegard dot se.

@@ -1,4 +1,4 @@
-$max-width: 550px;
+$max-width: 800px;
 
 *{
 	margin: 0;
@@ -11,12 +11,9 @@ body{
 	line-height: 1.5;
 	background: $color-background;
     color: $color-gray01;
-	@media screen and (max-width: 1040px){
-		margin: 0 20px;
-	}
+	margin: 0 20px;
 	@media screen and (max-width: 600px){
 		font-size: 13px;
-		margin: 0 20px;
 	}
 }
 
@@ -64,7 +61,7 @@ a:hover {
 .inner{
 	width: $max-width;
 	margin: 0 auto;
-	@media screen and (max-width: 1040px){
+	@media screen and (max-width: 800px){
 		width: 100%;
 	}
 }

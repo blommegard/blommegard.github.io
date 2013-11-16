@@ -4,7 +4,7 @@
   <title><![CDATA[Category: UIKit | Simon Blommegård]]></title>
   <link href="http://blommegard.github.io/blog/categories/uikit/atom.xml" rel="self"/>
   <link href="http://blommegard.github.io/"/>
-  <updated>2013-11-16T03:30:48-08:00</updated>
+  <updated>2013-11-16T03:33:59-08:00</updated>
   <id>http://blommegard.github.io/</id>
   <author>
     <name><![CDATA[Simon Blommegård]]></name>
@@ -18,7 +18,7 @@
     <link href="http://blommegard.github.io/blog/2013/11/15/custom-colored-status-bar-content-on-ios7/"/>
     <updated>2013-11-15T21:25:00-08:00</updated>
     <id>http://blommegard.github.io/blog/2013/11/15/custom-colored-status-bar-content-on-ios7</id>
-    <content type="html"><![CDATA[<p>As we all know the only two values of <code>UIStatusBarStyle</code> are <code>UIStatusBarStyleDefault</code> &amp; <code>UIStatusBarStyleLightContent</code>, the background behind the bar on the other hand can vary alot now days. During the iOS7 redesign at <a href="http://wrapp.com">Wrapp</a> we found it hard to match our yellow and brown colors with the white or black status bar content.</p>
+    <content type="html"><![CDATA[<p>As we all know the only two values of <code>UIStatusBarStyle</code> are <code>UIStatusBarStyleDefault</code> &amp; <code>UIStatusBarStyleLightContent</code>, the background behind the bar on the other hand can vary a lot nowadays. During the iOS7 redesign at <a href="http://wrapp.com">Wrapp</a> we found it hard to match our yellow and brown colors with the white or black status bar content.</p>
 
 <p><img src="/images/StatusBarBlackWhite.png" width="640"></p>
 

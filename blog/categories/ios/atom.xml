@@ -4,7 +4,7 @@
   <title><![CDATA[Category: iOS | Simon Blommegård]]></title>
   <link href="http://blommegard.github.io/blog/categories/ios/atom.xml" rel="self"/>
   <link href="http://blommegard.github.io/"/>
-  <updated>2013-11-16T03:29:27-08:00</updated>
+  <updated>2013-11-16T03:30:48-08:00</updated>
   <id>http://blommegard.github.io/</id>
   <author>
     <name><![CDATA[Simon Blommegård]]></name>
@@ -45,7 +45,7 @@
 
 <p><img src="/images/StatusBar.png" width="640"></p>
 
-<p>You you got a translucent bar, there will be a little more work to match the colors. Another take on this may be to create anoter window, place it in front and add the overlay to that one. But then you have to dispatch all touch event from that one as well.</p>
+<p>If you got a translucent bar, there will be a little more work to match the colors. Another take on this may be to create anoter window, place it in front and add the overlay to that one. But then you have to dispatch all touch event from that one as well.</p>
 
 <p>Another example of what you can do when you have a reference to the status bar window is translate it with the hamburger menu just like <a href="http://flyosity.com/interesting/">Interesting</a> does by <a href="http://twitter.com/flyosity">@flyosity</a></p>
 ]]></content>

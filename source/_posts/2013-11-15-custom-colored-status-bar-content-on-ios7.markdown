@@ -33,4 +33,4 @@ I use the same image as the `UINavigationBar` background image, but clip it to t
 
 You you got a translucent bar, there will be a little more work to match the colors. Another take on this may be to create anoter window, place it in front and add the overlay to that one. But then you have to dispatch all touch event from that one as well.
 
-Another example of what you can do when you have a reference to the status bar window is translate it with the hamburger menue just like [Interesting](http://flyosity.com/interesting/) does by [@flyosity](http://twitter.com/flyosity)
+Another example of what you can do when you have a reference to the status bar window is translate it with the hamburger menu just like [Interesting](http://flyosity.com/interesting/) does by [@flyosity](http://twitter.com/flyosity)

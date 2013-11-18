@@ -4,7 +4,7 @@
   <title><![CDATA[Simon Blommegård]]></title>
   <link href="http://blommegard.github.io/atom.xml" rel="self"/>
   <link href="http://blommegard.github.io/"/>
-  <updated>2013-11-16T14:28:25-08:00</updated>
+  <updated>2013-11-18T15:35:14-08:00</updated>
   <id>http://blommegard.github.io/</id>
   <author>
     <name><![CDATA[Simon Blommegård]]></name>
@@ -21,7 +21,7 @@
 
 <p><img src="http://blommegard.github.io/images/StatusBarBlackWhite.png" width="640"></p>
 
-<p>I started digging around for solutions and found the ivar <code>_statusBarWindow</code> on <a href="https://github.com/JaviSoto/iOS7-Runtime-Headers/blob/master/Frameworks/UIKit.framework/UIApplication.h#L22"><code>UIApplication</code></a>, yeah, yeah, I know it is private.</p>
+<p>Me and <a href="http://dribbble.com/Gellermark">Marcus</a> started digging around for solutions and found the ivar <code>_statusBarWindow</code> on <a href="https://github.com/JaviSoto/iOS7-Runtime-Headers/blob/master/Frameworks/UIKit.framework/UIApplication.h#L22"><code>UIApplication</code></a>, yeah, yeah, I know it is private.</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>

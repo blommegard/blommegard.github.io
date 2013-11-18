@@ -10,7 +10,7 @@ As we all know the only two values of `UIStatusBarStyle` are `UIStatusBarStyleDe
 
 {% img /images/StatusBarBlackWhite.png 640 %}
 
-I started digging around for solutions and found the ivar `_statusBarWindow` on [`UIApplication`](https://github.com/JaviSoto/iOS7-Runtime-Headers/blob/master/Frameworks/UIKit.framework/UIApplication.h#L22), yeah, yeah, I know it is private.
+Me and [Marcus](http://dribbble.com/Gellermark) started digging around for solutions and found the ivar `_statusBarWindow` on [`UIApplication`](https://github.com/JaviSoto/iOS7-Runtime-Headers/blob/master/Frameworks/UIKit.framework/UIApplication.h#L22), yeah, yeah, I know it is private.
 
 
 ``` objective-c

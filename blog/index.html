@@ -7,7 +7,7 @@
 
 	<meta name="author" content="Simon Blommegård">
 
-<meta name="description" content="As we all know the only two values of UIStatusBarStyle are UIStatusBarStyleDefault &amp; UIStatusBarStyleLightContent, the background behind the bar &hellip;"> <meta name="keywords" content="">
+<meta name="description" content="There are a lot of things to think about when it comes to the new architecture that apple calls arm64. Apple got a great transition guide including &hellip;"> <meta name="keywords" content="">
 
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -47,6 +47,42 @@
 </header>
 
 	<div id="content" class="inner">
+
+
+    <article class="post">
+	<header>
+		<h2 class="title">
+			
+			<a href="/blog/2013/11/19/include-tgmath-dot-h/">
+			
+				#include &#8220;tgmath.h&#8221;</a>
+		</h2>
+		<div class="meta date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-11-19T16:10:00-08:00" pubdate data-updated="true">Nov 19<span>th</span>, 2013</time></div>
+	</header>
+	<div class="entry-content">
+		<p>There are a lot of things to think about when it comes to the new architecture that apple calls arm64. Apple got a <a href="https://developer.apple.com/library/ios/documentation/General/Conceptual/CocoaTouch64BitGuide/Introduction/Introduction.html">great transition guide</a> including the <a href="https://developer.apple.com/library/ios/documentation/General/Conceptual/CocoaTouch64BitGuide/Major64-BitChanges/Major64-BitChanges.html">size and alignment tables</a> for the different datatypes. This is a biggie, and you should be very carefull when going forward and code for both archirectures. One datatype I use a lot in my UI code is <code>CGFloat</code>, and I hope you do as well. :)</p>
+
+<p>Until now I have always used <code>roundf()</code> and the other &ldquo;f-functions&rdquo; to round these values off. Now, however, when there is different underlying types we have to do this another way, a correct way. While reading the <a href="https://developer.apple.com/library/mac/documentation/cocoa/conceptual/Cocoa64BitGuide/Introduction/Introduction.html">64-Bit Transition Guide for Cocoa</a> (note, not the same as the Cocoa Touch above) I found out about the tgmath-header.</p>
+
+<p><code>tgmath.h</code> includes a bunch of very usefull macros to make it easier working with different datatypes on different architectures. So, go ahead and <code>#include "tgmath.h""</code> and just use the <code>round()</code> macro instead! Naturally, it includes the other common math-related operations as well.</p>
+
+		
+		
+	</div>
+
+</article>
 
 
     <article class="post">

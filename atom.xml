@@ -4,13 +4,28 @@
   <title><![CDATA[Simon Blommegård]]></title>
   <link href="http://blommegard.github.io/atom.xml" rel="self"/>
   <link href="http://blommegard.github.io/"/>
-  <updated>2013-11-19T17:31:48-08:00</updated>
+  <updated>2013-11-29T20:52:12-08:00</updated>
   <id>http://blommegard.github.io/</id>
   <author>
     <name><![CDATA[Simon Blommegård]]></name>
     
   </author>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Making Kortkoll public]]></title>
+    <link href="http://blommegard.github.io/blog/2013/11/29/making-kortkoll-public/"/>
+    <updated>2013-11-29T20:40:00-08:00</updated>
+    <id>http://blommegard.github.io/blog/2013/11/29/making-kortkoll-public</id>
+    <content type="html"><![CDATA[<p>In the begining of the summer, at <a href="http://www.sthlmstartuphack.com/">Stockholm Startup Hack</a> me, <a href="http://twitter.com/peterssonjesper">@peterssonjesper</a>, <a href="http://twitter.com/gellermark">@gellermark</a> and <a href="http://twitter.com/wibron">@wibron</a> created a hack called Kortkoll. It is an app that shows information about your <a href="http://sl.se/">SL</a> Access Card.</p>
+
+<p>It is an iOS7+ only app and my playground for testing out new features in the iOS SDK. I have now decided to put the source up at <a href="https://github.com/Kortkoll/kortkoll-ios">github</a> for everyone to have a look at. Maybe you learn something by it, or you find some nasty peace of code in there, either way, ping me about it! :)</p>
+
+<p>The app itself is programmed by me and all beautiful pixels is produced by <a href="http://dribbble.com/gellermark">gellermark</a>.</p>
+
+<p>Source: <a href="https://github.com/Kortkoll/kortkoll-ios">github.com/Kortkoll/kortkoll-ios</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[#include "tgmath.h"]]></title>

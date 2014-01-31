@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Simon Blommegård]]></title>
+  <link href="http://blommegard.github.io/atom.xml" rel="self"/>
+  <link href="http://blommegard.github.io/"/>
+  <updated>2014-01-31T03:50:58-08:00</updated>
+  <id>http://blommegard.github.io/</id>
+  <author>
+    <name><![CDATA[Simon Blommegård]]></name>
+    
+  </author>
+
+  
+  <entry>
+    <title type="html"><![CDATA[A take on custom transitions with UINavigationController]]></title>
+    <link href="http://blommegard.github.io/blog/2014/01/31/a-take-on-custom-transitions-with-uinavigationcontroller/"/>
+    <updated>2014-01-31T02:29:00-08:00</updated>
+    <id>http://blommegard.github.io/blog/2014/01/31/a-take-on-custom-transitions-with-uinavigationcontroller</id>
+    <content type="html"><![CDATA[<p>There exists a lot of great posts about how to create custom view controller transitions for <code>UINavigarionController</code> with the new API:s in iOS7, for example this by <a href="http://www.objc.io/issue-5/view-controller-transitions.html">objc.io</a>.
+This works fine, most of the time. However, if you want to have the default behavour, <a href="https://developer.apple.com/library/IOs/documentation/UIKit/Reference/UINavigationControllerDelegate_Protocol/Reference/Reference.html">Apple tells us</a> that you just return nil from the delegate methods <code>…animationControllerForOperation:…</code> &amp; <code>…interactionControllerForAnimationController:…</code>. This only sort of works. You get the correct animation controller features, but the interactive part is long gone. In my project I want the majority of view controllers pushed the default way (and of course with the interactive part as well) but one with my own transition.</p>
+
+<p>I want the result to feel like the real deal, and to write the pan-logic is not tempring at all, so I started to investigate. If we have a look att the <code>interactivePopGestureRecognizer</code> property of <code>UINavigationController</code> it holds a target of the class <a href="https://github.com/nst/iOS-Runtime-Headers/blob/master/Frameworks/UIKit.framework/_UINavigationInteractiveTransition.h"><code>_UINavigationInteractiveTransition</code></a>, wich is a subclass of <a href="https://github.com/nst/iOS-Runtime-Headers/blob/master/Frameworks/UIKit.framework/_UINavigationInteractiveTransitionBase.h"><code>_UINavigationInteractiveTransitionBase</code></a>, on this one we find the property <a href="https://github.com/nst/iOS-Runtime-Headers/blob/master/Frameworks/UIKit.framework/_UINavigationInteractiveTransitionBase.h#L42"><code>animationController</code></a>, bingo! We return that in <code>…animationControllerForOperation:…</code>, but still no luck.</p>
+
+<p>If we look even more on our <code>interactivePopGestureRecognizer</code> property it looks like everything should be ok, it is enabled, got a valid vew in the view hierarchy and a valid target/action. I still have no idea why it does not fire (checked by adding another target/action).</p>
+
+<p>What I ended up doing was creating a new instance of a <code>UIScreenEdgePanGestureRecognizer</code>, configure it with the left edge and set the exact same target/action as our <code>interactivePopGestureRecognizer</code>, with other words, the instance of <code>_UINavigationInteractiveTransition</code> and the action <code>handleNavigationTransition:</code>. And finally add it to the <code>UINavigationController</code>s view.
+There is a bit of <code>-valueForKey:</code>and <code>NSSelectorFromString()</code> in the final solution that I am not very proud of, but it works perfectly. Remember to be safe when implementing a solution like this, Apple change stuffs, as we all know.</p>
+
+<p>I’m <a href="http://twitter.com/blommegard">@blommegard</a> on Twitter, ping me with feedback or if I have missed something obvious. :)</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Making Kortkoll public]]></title>
+    <link href="http://blommegard.github.io/blog/2013/11/29/making-kortkoll-public/"/>
+    <updated>2013-11-29T20:40:00-08:00</updated>
+    <id>http://blommegard.github.io/blog/2013/11/29/making-kortkoll-public</id>
+    <content type="html"><![CDATA[<p>In the begining of the summer, at <a href="http://www.sthlmstartuphack.com/">Stockholm Startup Hack</a> me, <a href="http://twitter.com/peterssonjesper">@peterssonjesper</a>, <a href="http://twitter.com/gellermark">@gellermark</a> and <a href="http://twitter.com/wibron">@wibron</a> created a hack called Kortkoll. It is an app that shows information about your <a href="http://sl.se/">SL</a> Access Card.</p>
+
+<p>It is an iOS7+ only app and my playground for testing out new features in the iOS SDK. I have now decided to put the source up at <a href="https://github.com/Kortkoll/kortkoll-ios">github</a> for everyone to have a look at. Maybe you learn something by it, or you find some nasty peace of code in there. Either way, ping me about it! :)</p>
+
+<p>The app itself is programmed by me and all beautiful pixels are produced by <a href="http://dribbble.com/gellermark">gellermark</a>.</p>
+
+<p>Source: <a href="https://github.com/Kortkoll/kortkoll-ios">github.com/Kortkoll/kortkoll-ios</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[#include "tgmath.h"]]></title>
+    <link href="http://blommegard.github.io/blog/2013/11/19/include-tgmath-dot-h/"/>
+    <updated>2013-11-19T16:10:00-08:00</updated>
+    <id>http://blommegard.github.io/blog/2013/11/19/include-tgmath-dot-h</id>
+    <content type="html"><![CDATA[<p>There are a lot of things to think about when it comes to the new architecture that apple calls arm64. Apple got a <a href="https://developer.apple.com/library/ios/documentation/General/Conceptual/CocoaTouch64BitGuide/Introduction/Introduction.html">great transition guide</a> including the <a href="https://developer.apple.com/library/ios/documentation/General/Conceptual/CocoaTouch64BitGuide/Major64-BitChanges/Major64-BitChanges.html">size and alignment tables</a> for the different datatypes. This is a biggie, and you should be very carefull when going forward and code for both archirectures. One datatype I use a lot in my UI code is <code>CGFloat</code>, and I hope you do as well. :)</p>
+
+<p>Until now I have always used <code>roundf()</code> and the other &ldquo;f-functions&rdquo; to round these values off. Now, however, when there is different underlying types we have to do this another way, a correct way. While reading the <a href="https://developer.apple.com/library/mac/documentation/cocoa/conceptual/Cocoa64BitGuide/Introduction/Introduction.html">64-Bit Transition Guide for Cocoa</a> (note, not the same as the Cocoa Touch above) I found out about the tgmath-header.</p>
+
+<p><code>tgmath.h</code> includes a bunch of very usefull macros to make it easier working with different datatypes on different architectures. So, go ahead and <code>#include "tgmath.h""</code> and just use the <code>round()</code> macro instead! Naturally, it includes the other common math-related operations as well.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Custom colored status bar content on iOS7]]></title>
+    <link href="http://blommegard.github.io/blog/2013/11/15/custom-colored-status-bar-content-on-ios7/"/>
+    <updated>2013-11-15T21:25:00-08:00</updated>
+    <id>http://blommegard.github.io/blog/2013/11/15/custom-colored-status-bar-content-on-ios7</id>
+    <content type="html"><![CDATA[<p>As we all know the only two values of <code>UIStatusBarStyle</code> are <code>UIStatusBarStyleDefault</code> &amp; <code>UIStatusBarStyleLightContent</code>, the background behind the bar on the other hand can vary a lot nowadays. During the iOS7 redesign at <a href="http://wrapp.com">Wrapp</a> we found it hard to match our yellow and brown colors with the white or black status bar content.</p>
+
+<p><img src="http://blommegard.github.io/images/StatusBarBlackWhite.png" width="640"></p>
+
+<p>Me and <a href="http://dribbble.com/Gellermark">Marcus</a> started digging around for solutions and found the ivar <code>_statusBarWindow</code> on <a href="https://github.com/JaviSoto/iOS7-Runtime-Headers/blob/master/Frameworks/UIKit.framework/UIApplication.h#L22"><code>UIApplication</code></a>, yeah, yeah, I know it is private.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='objective-c'><span class='line'>  <span class="n">UIApplication</span> <span class="o">*</span><span class="n">app</span> <span class="o">=</span> <span class="p">[</span><span class="n">UIApplication</span> <span class="n">sharedApplication</span><span class="p">];</span>
+</span><span class='line'>  <span class="n">UIWindow</span> <span class="o">*</span><span class="n">window</span> <span class="o">=</span> <span class="p">[</span><span class="n">app</span> <span class="nl">valueForKey:</span><span class="s">@&quot;statusBarWindow&quot;</span><span class="p">];</span>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="n">window</span> <span class="o">&amp;&amp;</span> <span class="p">[</span><span class="n">window</span> <span class="nl">isKindOfClass:</span><span class="p">[</span><span class="n">UIWindow</span> <span class="n">class</span><span class="p">]])</span> <span class="p">{</span>
+</span><span class='line'>    <span class="n">UIImageView</span> <span class="o">*</span><span class="n">overlayImageView</span> <span class="o">=</span> <span class="p">[[</span><span class="n">UIImageView</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithFrame:</span><span class="n">app</span><span class="p">.</span><span class="n">statusBarFrame</span><span class="p">];</span>
+</span><span class='line'>    <span class="p">[</span><span class="n">overlayImageView</span> <span class="nl">setImage:</span><span class="p">[</span><span class="n">UIImage</span> <span class="nl">imageNamed:</span><span class="s">@&quot;Yellow Navigation Bar&quot;</span><span class="p">]];</span>
+</span><span class='line'>    <span class="p">[</span><span class="n">overlayImageView</span> <span class="nl">setClipsToBounds:</span><span class="n">YES</span><span class="p">];</span>
+</span><span class='line'>    <span class="p">[</span><span class="n">overlayImageView</span> <span class="nl">setContentMode:</span><span class="p">(</span><span class="n">UIViewContentModeScaleAspectFill</span><span class="p">)];</span>
+</span><span class='line'>    <span class="p">[</span><span class="n">overlayImageView</span> <span class="nl">setAlpha:</span><span class="mf">.4f</span><span class="p">];</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="p">[</span><span class="n">window</span> <span class="nl">addSubview:</span><span class="n">overlayImageView</span><span class="p">];</span>
+</span><span class='line'>  <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I use the same image as the <code>UINavigationBar</code> background image, but clip it to the status bar frame and add it above the bar in the window. The result:</p>
+
+<p><img src="http://blommegard.github.io/images/StatusBar.png" width="640"></p>
+
+<p>If you got a translucent bar, there will be a little more work to match the colors. Another take on this may be to create anoter window, place it in front and add the overlay to that one. But then you have to dispatch all touch event from that one as well.</p>
+
+<p>Another example of what you can do when you have a reference to the status bar window is translate it with the hamburger menu just like <a href="http://flyosity.com/interesting/">Interesting</a> does by <a href="http://twitter.com/flyosity">@flyosity</a></p>
+
+<p>I’m <a href="http://twitter.com/blommegard">@blommegard</a> on Twitter, ping me with feedback!</p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,124 @@
+
+<!DOCTYPE HTML>
+<html lang="en-GB">
+<head>
+	<meta charset="utf-8">
+	<title>A take on custom transitions with UINavigationController |  Simon Blommegård</title>
+
+	<meta name="author" content="Simon Blommegård">
+
+<meta name="description" content="There exists a lot of great posts about how to create custom view controller transitions for UINavigarionController with the new API:s in iOS7, for &hellip;"> <meta name="keywords" content="">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="Simon Blommegård" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	
+</head>
+
+
+
+<body>
+	<header id="header" class="inner"><h1><a href="/">Simon Blommegård</a></h1>
+<span class="tagline"></span>
+<nav id="main-nav"><ul>
+	<li><a href="/">Blog</a></li>
+	<li><a href="/about">About</a></li>
+	<li><a href="/archives">Archives</a></li>
+</ul>
+</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><ul>
+	<li><a href="/">Blog</a></li>
+	<li><a href="/about">About</a></li>
+	<li><a href="/archives">Archives</a></li>
+</ul>
+</div>
+	</div>
+</nav>
+
+
+</header>
+
+	<div id="content" class="inner"><article class="post">
+	<header>
+		<h2 class="title">A Take on Custom Transitions With UINavigationController</h2>
+		<div class="meta date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-01-31T02:29:00-08:00" pubdate data-updated="true">Jan 31<span>st</span>, 2014</time></div>
+	</header>
+	<div class="entry-content"><p>There exists a lot of great posts about how to create custom view controller transitions for <code>UINavigarionController</code> with the new API:s in iOS7, for example this by <a href="http://www.objc.io/issue-5/view-controller-transitions.html">objc.io</a>.
+This works fine, most of the time. However, if you want to have the default behavour, <a href="https://developer.apple.com/library/IOs/documentation/UIKit/Reference/UINavigationControllerDelegate_Protocol/Reference/Reference.html">Apple tells us</a> that you just return nil from the delegate methods <code>…animationControllerForOperation:…</code> &amp; <code>…interactionControllerForAnimationController:…</code>. This only sort of works. You get the correct animation controller features, but the interactive part is long gone. In my project I want the majority of view controllers pushed the default way (and of course with the interactive part as well) but one with my own transition.</p>
+
+<p>I want the result to feel like the real deal, and to write the pan-logic is not tempring at all, so I started to investigate. If we have a look att the <code>interactivePopGestureRecognizer</code> property of <code>UINavigationController</code> it holds a target of the class <a href="https://github.com/nst/iOS-Runtime-Headers/blob/master/Frameworks/UIKit.framework/_UINavigationInteractiveTransition.h"><code>_UINavigationInteractiveTransition</code></a>, wich is a subclass of <a href="https://github.com/nst/iOS-Runtime-Headers/blob/master/Frameworks/UIKit.framework/_UINavigationInteractiveTransitionBase.h"><code>_UINavigationInteractiveTransitionBase</code></a>, on this one we find the property <a href="https://github.com/nst/iOS-Runtime-Headers/blob/master/Frameworks/UIKit.framework/_UINavigationInteractiveTransitionBase.h#L42"><code>animationController</code></a>, bingo! We return that in <code>…animationControllerForOperation:…</code>, but still no luck.</p>
+
+<p>If we look even more on our <code>interactivePopGestureRecognizer</code> property it looks like everything should be ok, it is enabled, got a valid vew in the view hierarchy and a valid target/action. I still have no idea why it does not fire (checked by adding another target/action).</p>
+
+<p>What I ended up doing was creating a new instance of a <code>UIScreenEdgePanGestureRecognizer</code>, configure it with the left edge and set the exact same target/action as our <code>interactivePopGestureRecognizer</code>, with other words, the instance of <code>_UINavigationInteractiveTransition</code> and the action <code>handleNavigationTransition:</code>. And finally add it to the <code>UINavigationController</code>s view.
+There is a bit of <code>-valueForKey:</code>and <code>NSSelectorFromString()</code> in the final solution that I am not very proud of, but it works perfectly. Remember to be safe when implementing a solution like this, Apple change stuffs, as we all know.</p>
+
+<p>I’m <a href="http://twitter.com/blommegard">@blommegard</a> on Twitter, ping me with feedback or if I have missed something obvious. :)</p>
+</div>
+	
+
+</article>
+
+	
+	<div class="share">
+		<ul>
+			<li>
+  <a href="https://twitter.com/intent/tweet?text=A take on custom transitions with UINavigationController by @&url=http://blommegard.github.io/blog/2014/01/31/a-take-on-custom-transitions-with-uinavigationcontroller/" title="Share A take on custom transitions with UINavigationController on Twitter">
+    <img src="/images/social/twitter.png" />
+  </a>
+</li>
+
+			<li>
+  <a href="https://www.facebook.com/sharer.php?u=http://blommegard.github.io/blog/2014/01/31/a-take-on-custom-transitions-with-uinavigationcontroller/" title="Share A take on custom transitions with UINavigationController on Facebook">
+    <img src="/images/social/facebook.png" />
+  </a>
+</li>
+
+			<li>
+  <a href="https://plus.google.com/share?url=http://blommegard.github.io/blog/2014/01/31/a-take-on-custom-transitions-with-uinavigationcontroller/" title="Share A take on custom transitions with UINavigationController on Google Plus">
+    <img src="/images/social/google.png" />
+  </a>
+</li>
+
+		</ul>
+	</div>
+
+
+
+</div>
+	<footer id="footer" class="inner">&copy; 2014
+
+    Simon Blommegård
+
+</footer>
+	<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/hyphenator.js"></script>
+
+
+
+
+
+
+
+</body>
+</html>

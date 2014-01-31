@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: iOS | Simon Blommegård]]></title>
+  <link href="http://blommegard.github.io/blog/categories/ios/atom.xml" rel="self"/>
+  <link href="http://blommegard.github.io/"/>
+  <updated>2013-11-29T20:52:12-08:00</updated>
+  <id>http://blommegard.github.io/</id>
+  <author>
+    <name><![CDATA[Simon Blommegård]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[#include "tgmath.h"]]></title>
+    <link href="http://blommegard.github.io/blog/2013/11/19/include-tgmath-dot-h/"/>
+    <updated>2013-11-19T16:10:00-08:00</updated>
+    <id>http://blommegard.github.io/blog/2013/11/19/include-tgmath-dot-h</id>
+    <content type="html"><![CDATA[<p>There are a lot of things to think about when it comes to the new architecture that apple calls arm64. Apple got a <a href="https://developer.apple.com/library/ios/documentation/General/Conceptual/CocoaTouch64BitGuide/Introduction/Introduction.html">great transition guide</a> including the <a href="https://developer.apple.com/library/ios/documentation/General/Conceptual/CocoaTouch64BitGuide/Major64-BitChanges/Major64-BitChanges.html">size and alignment tables</a> for the different datatypes. This is a biggie, and you should be very carefull when going forward and code for both archirectures. One datatype I use a lot in my UI code is <code>CGFloat</code>, and I hope you do as well. :)</p>
+
+<p>Until now I have always used <code>roundf()</code> and the other &ldquo;f-functions&rdquo; to round these values off. Now, however, when there is different underlying types we have to do this another way, a correct way. While reading the <a href="https://developer.apple.com/library/mac/documentation/cocoa/conceptual/Cocoa64BitGuide/Introduction/Introduction.html">64-Bit Transition Guide for Cocoa</a> (note, not the same as the Cocoa Touch above) I found out about the tgmath-header.</p>
+
+<p><code>tgmath.h</code> includes a bunch of very usefull macros to make it easier working with different datatypes on different architectures. So, go ahead and <code>#include "tgmath.h""</code> and just use the <code>round()</code> macro instead! Naturally, it includes the other common math-related operations as well.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Custom colored status bar content on iOS7]]></title>
+    <link href="http://blommegard.github.io/blog/2013/11/15/custom-colored-status-bar-content-on-ios7/"/>
+    <updated>2013-11-15T21:25:00-08:00</updated>
+    <id>http://blommegard.github.io/blog/2013/11/15/custom-colored-status-bar-content-on-ios7</id>
+    <content type="html"><![CDATA[<p>As we all know the only two values of <code>UIStatusBarStyle</code> are <code>UIStatusBarStyleDefault</code> &amp; <code>UIStatusBarStyleLightContent</code>, the background behind the bar on the other hand can vary a lot nowadays. During the iOS7 redesign at <a href="http://wrapp.com">Wrapp</a> we found it hard to match our yellow and brown colors with the white or black status bar content.</p>
+
+<p><img src="/images/StatusBarBlackWhite.png" width="640"></p>
+
+<p>Me and <a href="http://dribbble.com/Gellermark">Marcus</a> started digging around for solutions and found the ivar <code>_statusBarWindow</code> on <a href="https://github.com/JaviSoto/iOS7-Runtime-Headers/blob/master/Frameworks/UIKit.framework/UIApplication.h#L22"><code>UIApplication</code></a>, yeah, yeah, I know it is private.</p>
+
+<p>``` objective-c
+  UIApplication <em>app = [UIApplication sharedApplication];
+  UIWindow </em>window = [app valueForKey:@&ldquo;statusBarWindow&rdquo;];
+  if (window &amp;&amp; [window isKindOfClass:[UIWindow class]]) {</p>
+
+<pre><code>UIImageView *overlayImageView = [[UIImageView alloc] initWithFrame:app.statusBarFrame];
+[overlayImageView setImage:[UIImage imageNamed:@"Yellow Navigation Bar"]];
+[overlayImageView setClipsToBounds:YES];
+[overlayImageView setContentMode:(UIViewContentModeScaleAspectFill)];
+[overlayImageView setAlpha:.4f];
+
+[window addSubview:overlayImageView];
+</code></pre>
+
+<p>  }
+```</p>
+
+<p>I use the same image as the <code>UINavigationBar</code> background image, but clip it to the status bar frame and add it above the bar in the window. The result:</p>
+
+<p><img src="/images/StatusBar.png" width="640"></p>
+
+<p>If you got a translucent bar, there will be a little more work to match the colors. Another take on this may be to create anoter window, place it in front and add the overlay to that one. But then you have to dispatch all touch event from that one as well.</p>
+
+<p>Another example of what you can do when you have a reference to the status bar window is translate it with the hamburger menu just like <a href="http://flyosity.com/interesting/">Interesting</a> does by <a href="http://twitter.com/flyosity">@flyosity</a></p>
+
+<p>I’m <a href="http://twitter.com/blommegard">@blommegard</a> on Twitter, ping me with feedback!</p>
+]]></content>
+  </entry>
+  
+</feed>

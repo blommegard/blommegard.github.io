@@ -1,0 +1,118 @@
+
+<!DOCTYPE HTML>
+<html lang="en-GB">
+<head>
+	<meta charset="utf-8">
+	<title>#include "tgmath.h" |  Simon Blommegård</title>
+
+	<meta name="author" content="Simon Blommegård">
+
+<meta name="description" content="There are a lot of things to think about when it comes to the new architecture that apple calls arm64. Apple got a great transition guide including &hellip;"> <meta name="keywords" content="">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="Simon Blommegård" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	
+</head>
+
+
+
+<body>
+	<header id="header" class="inner"><h1><a href="/">Simon Blommegård</a></h1>
+<span class="tagline"></span>
+<nav id="main-nav"><ul>
+	<li><a href="/">Blog</a></li>
+	<li><a href="/about">About</a></li>
+	<li><a href="/archives">Archives</a></li>
+</ul>
+</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><ul>
+	<li><a href="/">Blog</a></li>
+	<li><a href="/about">About</a></li>
+	<li><a href="/archives">Archives</a></li>
+</ul>
+</div>
+	</div>
+</nav>
+
+
+</header>
+
+	<div id="content" class="inner"><article class="post">
+	<header>
+		<h2 class="title">#include "tgmath.h"</h2>
+		<div class="meta date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-11-19T16:10:00-08:00" pubdate data-updated="true">Nov 19<span>th</span>, 2013</time></div>
+	</header>
+	<div class="entry-content"><p>There are a lot of things to think about when it comes to the new architecture that apple calls arm64. Apple got a <a href="https://developer.apple.com/library/ios/documentation/General/Conceptual/CocoaTouch64BitGuide/Introduction/Introduction.html">great transition guide</a> including the <a href="https://developer.apple.com/library/ios/documentation/General/Conceptual/CocoaTouch64BitGuide/Major64-BitChanges/Major64-BitChanges.html">size and alignment tables</a> for the different datatypes. This is a biggie, and you should be very carefull when going forward and code for both archirectures. One datatype I use a lot in my UI code is <code>CGFloat</code>, and I hope you do as well. :)</p>
+
+<p>Until now I have always used <code>roundf()</code> and the other &ldquo;f-functions&rdquo; to round these values off. Now, however, when there is different underlying types we have to do this another way, a correct way. While reading the <a href="https://developer.apple.com/library/mac/documentation/cocoa/conceptual/Cocoa64BitGuide/Introduction/Introduction.html">64-Bit Transition Guide for Cocoa</a> (note, not the same as the Cocoa Touch above) I found out about the tgmath-header.</p>
+
+<p><code>tgmath.h</code> includes a bunch of very usefull macros to make it easier working with different datatypes on different architectures. So, go ahead and <code>#include "tgmath.h""</code> and just use the <code>round()</code> macro instead! Naturally, it includes the other common math-related operations as well.</p>
+</div>
+	
+
+</article>
+
+	
+	<div class="share">
+		<ul>
+			<li>
+  <a href="https://twitter.com/intent/tweet?text=#include "tgmath.h" by @&url=http://blommegard.github.io/blog/2013/11/19/include-tgmath-dot-h/" title="Share #include "tgmath.h" on Twitter">
+    <img src="/images/social/twitter.png" />
+  </a>
+</li>
+
+			<li>
+  <a href="https://www.facebook.com/sharer.php?u=http://blommegard.github.io/blog/2013/11/19/include-tgmath-dot-h/" title="Share #include "tgmath.h" on Facebook">
+    <img src="/images/social/facebook.png" />
+  </a>
+</li>
+
+			<li>
+  <a href="https://plus.google.com/share?url=http://blommegard.github.io/blog/2013/11/19/include-tgmath-dot-h/" title="Share #include "tgmath.h" on Google Plus">
+    <img src="/images/social/google.png" />
+  </a>
+</li>
+
+		</ul>
+	</div>
+
+
+
+</div>
+	<footer id="footer" class="inner">&copy; 2013
+
+    Simon Blommegård
+
+</footer>
+	<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/hyphenator.js"></script>
+
+
+
+
+
+
+
+</body>
+</html>

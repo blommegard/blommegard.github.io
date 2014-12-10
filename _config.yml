@@ -1,0 +1,11 @@
+# Site settings
+title: Simon Blommegård
+email: simon@blommegard.se
+description: ""
+baseurl: ""
+url: "http://blommegard.se"
+twitter_username: blommegard
+github_username:  blommegard
+
+# Build settings
+markdown: kramdown
